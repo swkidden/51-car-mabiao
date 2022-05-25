@@ -74,9 +74,8 @@ void time0() interrupt 1 //timer 0
     n = count * 60; // 60s/1s
     count = 0; //清零变量
     EX1 = 1;   //打开外部中断
-    speed_m =
-        n * diameter * 2.54 * 3.14 / 100 / 60; //轮径单位英寸 1英寸=2.54cm m/min
-    speed_km = speed_m / 3.6;
+    speed_m = n * diameter * 2.54 * 3.14 / 100 / 60; //轮径单位英寸 1英寸=2.54cm m/min
+    speed_km = speed_m * 3.6;
 
     mileage_temp += speed_m;
     if (mileage_temp >= 1000) {

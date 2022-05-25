@@ -9,8 +9,10 @@
 #include "HAL_INIT.h"
 void hal_init(){
 /*---Timer 0------*/
-   TH0=(65536-50000)/256;//50ms
-   TL0=(65536-50000)%256;
+	TMOD &= 0xF0;		//清除定时器0模式位
+	TMOD |= 0x01;
+   TH0 = 0x3C;
+	 TL0 = 0xb0; 
    ET0=1;
    TR0=1;
 /*---External interrupt 1------*/ 

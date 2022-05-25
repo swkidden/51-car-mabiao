@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   TIME                                                              05/25/2022 22:13:38 PAGE 1   
+C51 COMPILER V9.57.0.0   TIME                                                              05/25/2022 23:34:28 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TIME
@@ -10,8 +10,8 @@ line level    source
 
    1          /*
    2           * @LastEditors: Dark white
-   3           * @LastEditTime: 2022-05-25 20:55:38
-   4           * @FilePath: \mabiao\app\time.c
+   3           * @LastEditTime: 2022-05-25 23:20:58
+   4           * @FilePath: \51-car-mabiao\app\time.c
    5           * @Description:
    6           *
    7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
@@ -62,7 +62,7 @@ line level    source
   52   2          if (QueryPop(data1)) {
   53   3            Send_byte(*data1);
   54   3            second = *data1;
-C51 COMPILER V9.57.0.0   TIME                                                              05/25/2022 22:13:38 PAGE 2   
+C51 COMPILER V9.57.0.0   TIME                                                              05/25/2022 23:34:28 PAGE 2   
 
   55   3            second_flag = 0;
   56   3          }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 22:41:19 PAGE 1   
+C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 23:34:28 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE DISPLAY
@@ -62,7 +62,7 @@ line level    source
   52   2      
   53   2          /*mileage*/
   54   2          LCD1602_write(1, 0x30 + mileage / 10 % 10);
-C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 22:41:19 PAGE 2   
+C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 23:34:28 PAGE 2   
 
   55   2          LCD1602_write(1, 0x30 + mileage % 10);
   56   2          LCD1602_writebyte("km ");
@@ -126,7 +126,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =   ----       1
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
-C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 22:41:19 PAGE 3   
+C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 23:34:28 PAGE 3   
 
 END OF MODULE INFORMATION.
 
