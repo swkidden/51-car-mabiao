@@ -1,7 +1,7 @@
 /*
  * @LastEditors: Dark white
- * @LastEditTime: 2022-05-25 22:37:13
- * @FilePath: \51\51-car-mabiao\app\wendu.h
+ * @LastEditTime: 2022-05-25 15:43:15
+ * @FilePath: \mabiao\app\wendu.h
  * @Description: 
  * 
  * Copyright (c) 2022 by Dark white, All Rights Reserved. 
@@ -10,5 +10,5 @@
 #define _WENDU_H_
 #include "../driver/HAL_INIT.h"
 extern uint8 temperature;
-void Get_Tmp();
+void DHT11_receive();
 #endif

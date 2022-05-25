@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 19:19:52 PAGE 1   
+C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 22:41:18 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE C51
@@ -10,8 +10,8 @@ line level    source
 
    1          /*
    2           * @LastEditors: Dark white
-   3           * @LastEditTime: 2022-05-25 19:19:47
-   4           * @FilePath: \mabiao\src\C51.c
+   3           * @LastEditTime: 2022-05-25 22:37:31
+   4           * @FilePath: \51\51-car-mabiao\src\C51.c
    5           * @Description:
    6           *
    7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
@@ -53,16 +53,16 @@ line level    source
   43   2          key_regesiter();
   44   2          display(page);
   45   2          update_time();
-  46   2          /* 10s call */
+  46   2          /* 1s call */
   47   2          if (ten_s >= 20) {
   48   3            ten_s = 0;
-  49   3            DHT11_receive();
+  49   3            Get_Tmp();
   50   3          }
   51   2        }
   52   1      }
   53          
   54          void time0() interrupt 1 //timer 0
-C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 19:19:52 PAGE 2   
+C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 22:41:18 PAGE 2   
 
   55          {
   56   1        TH0 = 0x3C;
@@ -126,7 +126,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    PDATA SIZE       =   ----    ----
    DATA SIZE        =     16    ----
    IDATA SIZE       =   ----    ----
-C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 19:19:52 PAGE 3   
+C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 22:41:18 PAGE 3   
 
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.

@@ -1,7 +1,7 @@
 /*
  * @LastEditors: Dark white
- * @LastEditTime: 2022-05-25 19:19:47
- * @FilePath: \mabiao\src\C51.c
+ * @LastEditTime: 2022-05-25 22:37:31
+ * @FilePath: \51\51-car-mabiao\src\C51.c
  * @Description:
  *
  * Copyright (c) 2022 by Dark white, All Rights Reserved.
@@ -43,10 +43,10 @@ void main() {
     key_regesiter();
     display(page);
     update_time();
-    /* 10s call */
+    /* 1s call */
     if (ten_s >= 20) {
       ten_s = 0;
-      DHT11_receive();
+      Get_Tmp();
     }
   }
 }
