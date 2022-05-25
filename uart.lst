@@ -1,0 +1,84 @@
+C51 COMPILER V9.57.0.0   UART                                                              05/25/2022 19:19:52 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN uart.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE driver\uart.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\uart.lst)
+                    - TABS(2) OBJECT(uart.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-25 19:19:05
+   4           * @FilePath: \mabiao\driver\uart.c
+   5           * @Description:
+   6           *
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
+   8           */
+   9          #include "queue.h"
+  10          #include "uart.h"
+  11          void uart_init (unsigned char method, unsigned char double_rate) {
+  12   1      
+  13   1        if (double_rate) {
+  14   2          PCON = PCON | (1 << 7);
+  15   2        } else {
+  16   2          PCON = PCON & 0x7f;
+  17   2        }
+  18   1      
+  19   1        switch (method) {
+  20   2        case 1:
+  21   2          SCON = 0X50;
+  22   2          break;
+  23   2        case 2:
+  24   2          SCON = 0X90;
+  25   2          EA = 1;
+  26   2          ES = 1;
+  27   2          return;
+  28   2        }
+  29   1      
+  30   1        TMOD &= 0x0F;   //清除定时器1模式位
+  31   1        TMOD |= 0x20;   //设定定时器1为8位自动重装方式
+  32   1        TH1 = 204;
+  33   1        TL1 = 204;
+  34   1        ET1 = 0;    //禁止定时器1中断
+  35   1        EA = 1;
+  36   1        TR1 = 1;
+  37   1        ES = 1;
+  38   1      }
+  39          
+  40          void Send_byte(unsigned char byte) {
+  41   1        SBUF = byte;
+  42   1        while (TI == 0);
+  43   1        TI = 0;
+  44   1      }
+  45          
+  46          void Send_string(unsigned char *table) {
+  47   1      
+  48   1        while (*table) {
+  49   2          Send_byte(*table++);
+  50   2        }
+  51   1      }
+  52          
+  53          void uart(void) interrupt 4 { //串口接收
+  54   1        if (RI) {
+C51 COMPILER V9.57.0.0   UART                                                              05/25/2022 19:19:52 PAGE 2   
+
+  55   2          QueryPush(SBUF); // 接收数据
+  56   2          RI = 0;         // 清除接收中断标志位
+  57   2        }
+  58   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    164    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

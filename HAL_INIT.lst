@@ -1,0 +1,44 @@
+C51 COMPILER V9.57.0.0   HAL_INIT                                                          05/25/2022 18:56:20 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE HAL_INIT
+OBJECT MODULE PLACED IN HAL_INIT.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE driver\HAL_INIT.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\HAL_I
+                    -NIT.lst) TABS(2) OBJECT(HAL_INIT.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-25 17:21:10
+   4           * @FilePath: \mabiao\driver\HAL_INIT.c
+   5           * @Description: 
+   6           * 
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved. 
+   8           */
+   9          #include "HAL_INIT.h"
+  10          void hal_init(){
+  11   1      /*---Timer 0------*/
+  12   1         TH0=(65536-50000)/256;//50ms
+  13   1         TL0=(65536-50000)%256;
+  14   1         ET0=1;
+  15   1         TR0=1;
+  16   1      /*---External interrupt 1------*/ 
+  17   1         EX1=1;
+  18   1         IT1=1;
+  19   1         EA=1;
+  20   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     17    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

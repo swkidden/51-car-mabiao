@@ -1,0 +1,134 @@
+C51 COMPILER V9.57.0.0   WENDU                                                             05/25/2022 22:20:08 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE WENDU
+OBJECT MODULE PLACED IN wendu.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE app\wendu.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\wendu.lst) 
+                    -TABS(2) OBJECT(wendu.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-25 17:18:30
+   4           * @FilePath: \mabiao\app\wendu.c
+   5           * @Description: based on dth11
+   6           *
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
+   8           */
+   9          #include "wendu.h"
+  10          #include"../driver/uart.h"
+  11          #include <intrins.h>
+  12          sbit Data = P3 ^ 7; //定义数据线
+  13          uint8 temperature=0;
+  14          /*------------------------------------------------
+  15           uS延时函数，含有输入参数 unsigned char t，无返回值
+  16           unsigned char 是定义无符号字符变量，其值的范围是
+  17           0~255 这里使用晶振12M，精确延时请使用汇编,大致延时
+  18           长度如下 T=tx2+5 uS
+  19          ------------------------------------------------*/
+  20          void DelayUs2x(unsigned char t) {
+  21   1        while (--t)
+  22   1          ;
+  23   1      }
+  24          /*------------------------------------------------
+  25           mS延时函数，含有输入参数 unsigned char t，无返回值
+  26           unsigned char 是定义无符号字符变量，其值的范围是
+  27           0~255 这里使用晶振12M，精确延时请使用汇编
+  28          ------------------------------------------------*/
+  29          void DelayMs(unsigned char t) {
+  30   1      
+  31   1        while (t--) {
+  32   2          //大致延时1mS
+  33   2          DelayUs2x(245);
+  34   2          DelayUs2x(245);
+  35   2        }
+  36   1      }
+  37          /*------------------------------------------------
+  38                        DHT11延时函数
+  39          ------------------------------------------------*/
+  40          void DHT11_delay_us(uint8 n) {
+  41   1        while (--n)
+  42   1          ;
+  43   1      }
+  44          
+  45          void DHT11_delay_ms(uint16 z) {
+  46   1        uint16 i, j;
+  47   1        for (i = z; i > 0; i--)
+  48   1          for (j = 110; j > 0; j--)
+  49   1            ;
+  50   1      }
+  51          /*------------------------------------------------
+  52                        DHT11开始信号
+  53          ------------------------------------------------*/
+  54          void DHT11_start() {
+C51 COMPILER V9.57.0.0   WENDU                                                             05/25/2022 22:20:08 PAGE 2   
+
+  55   1        Data = 1;
+  56   1        DHT11_delay_us(2);
+  57   1        Data = 0;
+  58   1        DHT11_delay_ms(25); //延时18ms以上
+  59   1        Data = 1;
+  60   1        DHT11_delay_us(30);
+  61   1      }
+  62          /*------------------------------------------------
+  63                        接收八位二进制
+  64          ------------------------------------------------*/
+  65          uint8 DHT11_rec_byte() //接收一个字节
+  66          {
+  67   1        uint8 i, dat = 0;
+  68   1        for (i = 0; i < 8; i++) //从高到低依次接收8位数据
+  69   1        {
+  70   2          while (!Data);                 //等待50us低电平过去
+  71   2          DHT11_delay_us(8); //延时60us，如果还为高则数据为1，否则为0
+  72   2          dat <<= 1;     //移位使正确接收8位数据，数据为0时直接移位
+  73   2          if (Data == 1) //数据为1时，使dat加1来接收数据1
+  74   2            dat += 1;
+  75   2          while (Data)
+  76   2            ; //等待数据线拉低
+  77   2        }
+  78   1        return dat;
+  79   1      }
+  80          /*------------------------------------------------
+  81                        接收40bit数据
+  82          ------------------------------------------------*/
+  83          void DHT11_receive() //接收40位的数据
+  84          {
+  85   1        uint8 R_H, R_L, T_H, T_L, revise;
+  86   1        DHT11_start();
+  87   1      
+  88   1        if (Data == 0) {
+  89   2      
+  90   2          while (Data == 0); //等待拉高
+  91   2      
+  92   2          DHT11_delay_us(40);        //拉高后延时80us
+  93   2          R_H = DHT11_rec_byte();    //接收湿度高八位
+  94   2          R_L = DHT11_rec_byte();    //接收湿度低八位
+  95   2          T_H = DHT11_rec_byte();    //接收温度高八位
+  96   2          T_L = DHT11_rec_byte();    //接收温度低八位
+  97   2          revise = DHT11_rec_byte(); //接收校正位
+  98   2      
+  99   2          DHT11_delay_us(25); //结束
+ 100   2      
+ 101   2          //if ((R_H + R_L + T_H + T_L) == revise) //校正
+ 102   2          {
+ 103   3            temperature = T_H;
+ 104   3          }
+ 105   2        }
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    156    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.57.0.0   WENDU                                                             05/25/2022 22:20:08 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

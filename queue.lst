@@ -1,0 +1,57 @@
+C51 COMPILER V9.57.0.0   QUEUE                                                             05/25/2022 19:06:55 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE QUEUE
+OBJECT MODULE PLACED IN queue.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE driver\queue.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\queue.ls
+                    -t) TABS(2) OBJECT(queue.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-25 12:21:45
+   4           * @FilePath: \mabiao\driver\queue.c
+   5           * @Description: 先入先出队列用于串口
+   6           *
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
+   8           */
+   9          #include"queue.h"
+  10          #include "HAL_INIT.h"
+  11          unsigned char receive_buff[QUEUE_SIZE] = {0};
+  12          unsigned char front = 0;
+  13          unsigned char rear = 0;
+  14          
+  15          unsigned char QueryPush(unsigned char dat) {
+  16   1        if (((front + 1) % QUEUE_SIZE) != rear) //队列没满
+  17   1        {
+  18   2          receive_buff[front++] = dat;
+  19   2          front %= QUEUE_SIZE;
+  20   2          return 1;
+  21   2        } else
+  22   1          return 0;
+  23   1      }
+  24          
+  25          unsigned char QueryPop(unsigned char *dat) {
+  26   1        if (front != rear) //队列不为空
+  27   1        {
+  28   2          *dat = receive_buff[rear++];
+  29   2          rear %= QUEUE_SIZE;
+  30   2          return 1;
+  31   2        }
+  32   1        return 0;
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

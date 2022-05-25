@@ -1,0 +1,12 @@
+"C51.obj",
+"key.obj",
+"uart.obj",
+"HAL_INIT.obj",
+"LCD1602.obj",
+"queue.obj",
+"display.obj",
+"time.obj",
+"wendu.obj",
+"key_task.obj" 
+TO "C51" 
+RAMSIZE(256) 

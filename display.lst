@@ -1,0 +1,134 @@
+C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 18:56:20 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE DISPLAY
+OBJECT MODULE PLACED IN display.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE app\display.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\display.l
+                    -st) TABS(2) OBJECT(display.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-24 16:56:15
+   4           * @FilePath: \mabiao\app\display.c
+   5           * @Description:
+   6           *
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
+   8           */
+   9          #include "display.h"
+  10          #include "../driver/LCD1602.h"
+  11          #include "../src/c51.h"
+  12          #include "time.h"
+  13          #include "wendu.h"
+  14          void display(unsigned char page) {
+  15   1        if (page == 0) {
+  16   2          LCD1602_write(0, 0x80);
+  17   2          /* m/s */
+  18   2          LCD1602_write(1, 0x30 + speed_m / 100 % 10);
+  19   2          LCD1602_write(1, 0x30 + speed_m / 10 % 10);
+  20   2          LCD1602_write(1, 0x30 + speed_m % 10);
+  21   2          LCD1602_writebyte("m/s ");
+  22   2      
+  23   2          /*mileage*/
+  24   2          LCD1602_write(1, 0x30 + mileage / 10 % 10);
+  25   2          LCD1602_write(1, 0x30 + mileage % 10);
+  26   2          LCD1602_writebyte("km ");
+  27   2      
+  28   2          /* temperature */
+  29   2          LCD1602_writebyte("c:");
+  30   2          LCD1602_write(1, 0x30 + temperature / 10 % 10);
+  31   2          LCD1602_write(1, 0x30 + temperature % 10);
+  32   2      
+  33   2          /* -------------------Second line------------------ */
+  34   2          LCD1602_write(0, 0xc0);
+  35   2          /* time */
+  36   2          LCD1602_writebyte("time: ");
+  37   2          LCD1602_write(1, 0x30 + hour / 10 % 10);
+  38   2          LCD1602_write(1, 0x30 + hour % 10);
+  39   2          LCD1602_writebyte(":");
+  40   2          LCD1602_write(1, 0x30 + branch / 10 % 10);
+  41   2          LCD1602_write(1, 0x30 + branch % 10);
+  42   2          LCD1602_writebyte(":");
+  43   2          LCD1602_write(1, 0x30 + second / 10 % 10);
+  44   2          LCD1602_write(1, 0x30 + second % 10);
+  45   2      
+  46   2        } else if (page == 1) {
+  47   2          LCD1602_write(0, 0x80);
+  48   2          /* m/s */
+  49   2          LCD1602_write(1, 0x30 + speed_km / 10 % 10);
+  50   2          LCD1602_write(1, 0x30 + speed_km % 10);
+  51   2          LCD1602_writebyte("km/h ");
+  52   2      
+  53   2          /*mileage*/
+  54   2          LCD1602_write(1, 0x30 + mileage / 10 % 10);
+C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 18:56:20 PAGE 2   
+
+  55   2          LCD1602_write(1, 0x30 + mileage % 10);
+  56   2          LCD1602_writebyte("km ");
+  57   2      
+  58   2          /* temperature */
+  59   2          LCD1602_writebyte("c:");
+  60   2          LCD1602_write(1, 0x30 + temperature / 10 % 10);
+  61   2          LCD1602_write(1, 0x30 + temperature % 10);
+  62   2      
+  63   2          /* -------------------Second line------------------ */
+  64   2          LCD1602_write(0, 0xc0);
+  65   2          /* time */
+  66   2          LCD1602_writebyte("time: ");
+  67   2          LCD1602_write(1, 0x30 + hour / 10 % 10);
+  68   2          LCD1602_write(1, 0x30 + hour % 10);
+  69   2          LCD1602_writebyte(":");
+  70   2          LCD1602_write(1, 0x30 + branch / 10 % 10);
+  71   2          LCD1602_write(1, 0x30 + branch % 10);
+  72   2          LCD1602_writebyte(":");
+  73   2          LCD1602_write(1, 0x30 + second / 10 % 10);
+  74   2          LCD1602_write(1, 0x30 + second % 10);
+  75   2      
+  76   2        } else if (page == 2) {
+  77   2          /* r/min */
+  78   2          LCD1602_write(0, 0x80);
+  79   2          LCD1602_write(1, 0x30 + n / 1000 % 10);
+  80   2          LCD1602_write(1, 0x30 + n / 100 % 10);
+  81   2          LCD1602_write(1, 0x30 + n / 10 % 10);
+  82   2          LCD1602_write(1, 0x30 + n % 10);
+  83   2          LCD1602_writebyte("r/min ");
+  84   2      
+  85   2        } else if (page == 3) {
+  86   2          LCD1602_write(0, 0x80);
+  87   2          LCD1602_writebyte("Diameter:");
+  88   2          LCD1602_write(1, 0x30 + diameter / 10 % 10);
+  89   2          LCD1602_write(1, 0x30 + diameter % 10);
+  90   2          LCD1602_write(0, 0xc0);
+  91   2      
+  92   2        } else if (page == 4) {
+  93   2          LCD1602_write(0, 0x80);
+  94   2          LCD1602_writebyte("Alarm speed:");
+  95   2          LCD1602_write(1, 0x30 + speed_h / 10 % 10);
+  96   2          LCD1602_write(1, 0x30 + speed_h % 10);
+  97   2          LCD1602_writebyte("km/h");
+  98   2          LCD1602_write(0, 0xc0);
+  99   2        } else if (page == 5) {
+ 100   2          LCD1602_write(0, 0x80);
+ 101   2          LCD1602_writebyte("reservation");
+ 102   2        } else if (page == 6) { //保存成功的页面 定时显示2s
+ 103   2          LCD1602_write(0, 0x80);
+ 104   2          LCD1602_writebyte("Successful");
+ 105   2        }
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    773    ----
+   CONSTANT SIZE    =     85    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.57.0.0   DISPLAY                                                           05/25/2022 18:56:20 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

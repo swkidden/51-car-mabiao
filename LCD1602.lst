@@ -1,0 +1,85 @@
+C51 COMPILER V9.57.0.0   LCD1602                                                           05/25/2022 15:40:51 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN LCD1602.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE driver\LCD1602.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\LCD160
+                    -2.lst) TABS(2) OBJECT(LCD1602.obj)
+
+line level    source
+
+   1          #include "LCD1602.h"
+   2          sbit LCD1602_rs=P2^7;//IO 定义
+   3          sbit LCD1602_rw=P2^6;
+   4          sbit LCD1602_e=P2^5;
+   5          
+   6          
+   7          void LCD1602_delay(uint T)            //延时函数
+   8          {
+   9   1        while(T--);
+  10   1      }
+  11          
+  12          /********************************************************************
+  13          * 名称 : LCD1602_write(uchar order,dat)
+  14          * 功能 : 1602写如数据函数
+  15          * 输入 : order为数据/命令切换变量 //0是命令 1是数据
+  16          * : dat为数据/命令的发送数据
+  17          * 输出 : 无
+  18          ***********************************************************************/
+  19          void LCD1602_write(uchar order,dat)         //1602 一个字节  处理
+  20          {
+  21   1          LCD1602_e=0;
+  22   1          LCD1602_rs=order;
+  23   1          LCD1602_dat=dat;
+  24   1          LCD1602_rw=0;
+  25   1          LCD1602_e=1;
+  26   1          LCD1602_delay(1);
+  27   1          LCD1602_e=0;                                                     
+  28   1      }
+  29          /********************************************************************
+  30          * 名称 : LCD1602_writebye(uchar *prointer)
+  31          * 功能 : 1602写入数据函数  指针式
+  32          * 输入 : 输入需要显示的内容
+  33          * 输出 : 无
+  34          ***********************************************************************/
+  35          void LCD1602_writebyte(uchar *prointer)          //1602 字符串    处理
+  36          {
+  37   1          while(*prointer!='\0')
+  38   1          {
+  39   2              LCD1602_write(1,*prointer);
+  40   2              prointer++;
+  41   2          }
+  42   1      }
+  43          /********************************************************************
+  44          * 名称 : LCD1602_cls()
+  45          * 功能 : 初始化1602液晶 
+  46          * 输入 : 无
+  47          * 输出 : 无
+  48          ***********************************************************************/
+  49          void LCD1602_cls()                   //1602 初始化
+  50          {
+  51   1        LCD1602_write(0,0x01);     //1602 清屏 指令
+  52   1        LCD1602_delay(1500);
+  53   1        LCD1602_write(0,0x38);     // 功能设置 8位、5*7点阵
+  54   1        LCD1602_delay(1500);
+C51 COMPILER V9.57.0.0   LCD1602                                                           05/25/2022 15:40:51 PAGE 2   
+
+  55   1        LCD1602_write(0,0x0c);     //设置 光标   不显示开关、不显示光标、字符不闪烁
+  56   1        LCD1602_write(0,0x06);
+  57   1        LCD1602_write(0,0xd0);
+  58   1        LCD1602_delay(1500);
+  59   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    125    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

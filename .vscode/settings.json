@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "reg52.h": "c",
+        "REG52.H": "cpp",
+        "LCD1602.H": "cpp",
+        "intrins.h": "c",
+        "INTRINS.H": "cpp",
+        "key.H": "cpp",
+        "hal_init.h": "c",
+        "c51.h": "c",
+        "display.h": "c",
+        "wendu.h": "c",
+        "queue.h": "c",
+        "cstddef": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c"
+    }
+}

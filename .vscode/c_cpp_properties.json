@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Win64",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x86",
+            "compileCommands": "${default}",
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",                
+                "_GLOBAL_C_",
+                "interrupt=",
+                "xdata=",
+                "data=",
+                "sbit=char",
+                "sfr=char",
+                "bit=u8"
+            ],
+            "includePath": [                
+                "${workspaceFolder}/driver",
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/app",
+                "E:\\Keil\\C51\\INC"       
+            ]            
+        }
+    ],
+    "version": 4
+}

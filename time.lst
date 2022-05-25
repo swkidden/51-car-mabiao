@@ -1,0 +1,84 @@
+C51 COMPILER V9.57.0.0   TIME                                                              05/25/2022 22:13:38 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN time.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE app\time.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\time.lst) TA
+                    -BS(2) OBJECT(time.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-25 20:55:38
+   4           * @FilePath: \mabiao\app\time.c
+   5           * @Description:
+   6           *
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
+   8           */
+   9          #include "time.h"
+  10          #include "../driver/queue.h"
+  11          #include "../driver/uart.h"
+  12          uint8 hour = 13;
+  13          uint8 branch = 0;
+  14          uint8 second = 0;
+  15          static bit hour_flag;
+  16          bit branch_flag;
+  17          bit second_flag;
+  18          void update_time() {
+  19   1        static uint8 *data1;
+  20   1        if (!hour_flag && !branch_flag && !second_flag &&
+  21   1          QueryPop(data1)) { //帧头检测模式
+  22   2       //   Send_byte(*data1);
+  23   2        //  Send_byte(hour_flag); 
+  24   2          switch (*data1) {
+  25   3          case 0x61:
+  26   3            hour_flag = 1;
+  27   3            break;
+  28   3          case 0x62:
+  29   3            branch_flag = 1;
+  30   3            break;
+  31   3          case 0x63:
+  32   3            second_flag = 1;
+  33   3            break;
+  34   3          default:
+  35   3            break;
+  36   3          }
+  37   2        } else if (hour_flag) {
+  38   2         // Send_string("hour_flag:1 /n"); 
+  39   2          if (QueryPop(data1)) {
+  40   3         //   Send_string("set time/n"); 
+  41   3            hour = *data1;
+  42   3            hour_flag = 0;
+  43   3          //  Send_string("hour_flag:0 /n"); 
+  44   3          }
+  45   2        } else if (branch_flag) { //数据处理
+  46   2          if (QueryPop(data1)) {
+  47   3            Send_byte(*data1);
+  48   3            branch = *data1;
+  49   3            branch_flag = 0;
+  50   3          }
+  51   2        } else if (second_flag) { //数据处理
+  52   2          if (QueryPop(data1)) {
+  53   3            Send_byte(*data1);
+  54   3            second = *data1;
+C51 COMPILER V9.57.0.0   TIME                                                              05/25/2022 22:13:38 PAGE 2   
+
+  55   3            second_flag = 0;
+  56   3          }
+  57   2        }
+  58   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    163    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,111 @@
+C51 COMPILER V9.57.0.0   KEY_TASK                                                          05/25/2022 15:40:52 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE KEY_TASK
+OBJECT MODULE PLACED IN key_task.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE app\key_task.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\key_task
+                    -.lst) TABS(2) OBJECT(key_task.obj)
+
+line level    source
+
+   1          /*
+   2           * @LastEditors: Dark white
+   3           * @LastEditTime: 2022-05-24 16:48:32
+   4           * @FilePath: \mabiao\app\key_task.c
+   5           * @Description:
+   6           *
+   7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
+   8           */
+   9          #include "key_task.h"
+  10          #include "../driver/LCD1602.h"
+  11          #include "../src/c51.h"
+  12          #include "../driver/eeprom52.h"
+  13          void key_regesiter() {
+  14   1        switch (Key_scan()) {
+  15   2        case flag_left:
+  16   2          if (page > 0&&page<6) {
+  17   3            page--;
+  18   3            LCD1602_write(0, 0x01);
+  19   3          }
+  20   2          break;
+  21   2        case flag_up:
+  22   2          switch (page) {
+  23   3          case 3:
+  24   3            if (diameter < 99) {
+  25   4              diameter++;
+  26   4            }
+  27   3            break;
+  28   3          case 4:
+  29   3            if (speed_h < 99) {
+  30   4              speed_h++;
+  31   4            }
+  32   3            break;
+  33   3          case 5:
+  34   3            write_memory();
+  35   3            page=6;
+  36   3          default:
+  37   3            break;
+  38   3          }
+  39   2          break;
+  40   2        case flag_down:
+  41   2          switch (page) {
+  42   3          case 3:
+  43   3            if (diameter > 0) {
+  44   4              diameter--;
+  45   4            }
+  46   3            break;
+  47   3          case 4:
+  48   3            if (speed_h > 0) {
+  49   4              speed_h--;
+  50   4            }
+  51   3          default:
+  52   3            break;
+  53   3          }
+  54   2          break;
+C51 COMPILER V9.57.0.0   KEY_TASK                                                          05/25/2022 15:40:52 PAGE 2   
+
+  55   2        case flag_right:
+  56   2          if (page < 5) {
+  57   3            page++;
+  58   3            LCD1602_write(0, 0x01);
+  59   3          }
+  60   2          break;
+  61   2        default:
+  62   2          break;
+  63   2        }
+  64   1      }
+  65          void write_memory() {
+  66   1        SectorErase(0x2000);
+  67   1        byte_write(0x2000,speed_h );
+  68   1        byte_write(0x2001,diameter );
+  69   1        byte_write(0x2002,mileage );
+  70   1      }
+  71          
+  72           void read_memory() {
+  73   1        speed_h =  byte_read(0x2000);
+  74   1        if (speed_h > 99||speed_h<0) {
+  75   2          speed_h = 0;
+  76   2        }
+  77   1        diameter =  byte_read(0x2001);
+  78   1        if (diameter > 99||diameter<0) {
+  79   2          diameter = 0;
+  80   2        }
+  81   1        mileage =  byte_read(0x2002);
+  82   1        if (mileage > 99||mileage<0) {
+  83   2          mileage = 99;
+  84   2        }
+  85   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    337    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
