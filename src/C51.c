@@ -1,7 +1,7 @@
 /*
  * @LastEditors: Dark white
- * @LastEditTime: 2022-05-25 22:37:31
- * @FilePath: \51\51-car-mabiao\src\C51.c
+ * @LastEditTime: 2022-05-26 00:18:09
+ * @FilePath: \51-car-mabiao\src\C51.c
  * @Description:
  *
  * Copyright (c) 2022 by Dark white, All Rights Reserved.
@@ -76,7 +76,6 @@ void time0() interrupt 1 //timer 0
     EX1 = 1;   //打开外部中断
     speed_m = n * diameter * 2.54 * 3.14 / 100 / 60; //轮径单位英寸 1英寸=2.54cm m/min
     speed_km = speed_m * 3.6;
-
     mileage_temp += speed_m;
     if (mileage_temp >= 1000) {
       mileage_temp = 0;

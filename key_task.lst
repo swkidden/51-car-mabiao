@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   KEY_TASK                                                          05/25/2022 23:34:28 PAGE 1   
+C51 COMPILER V9.57.0.0   KEY_TASK                                                          05/26/2022 12:01:40 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE KEY_TASK
@@ -10,8 +10,8 @@ line level    source
 
    1          /*
    2           * @LastEditors: Dark white
-   3           * @LastEditTime: 2022-05-24 16:48:32
-   4           * @FilePath: \mabiao\app\key_task.c
+   3           * @LastEditTime: 2022-05-26 11:45:09
+   4           * @FilePath: \51-car-mabiao\app\key_task.c
    5           * @Description:
    6           *
    7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
@@ -62,7 +62,7 @@ line level    source
   52   3            break;
   53   3          }
   54   2          break;
-C51 COMPILER V9.57.0.0   KEY_TASK                                                          05/25/2022 23:34:28 PAGE 2   
+C51 COMPILER V9.57.0.0   KEY_TASK                                                          05/26/2022 12:01:40 PAGE 2   
 
   55   2        case flag_right:
   56   2          if (page < 5) {

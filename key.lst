@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   KEY                                                               05/25/2022 23:34:27 PAGE 1   
+C51 COMPILER V9.57.0.0   KEY                                                               05/26/2022 12:01:40 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE KEY
@@ -10,36 +10,37 @@ line level    source
 
    1          /*
    2           * @LastEditors: Dark white
-   3           * @LastEditTime: 2022-05-24 00:07:32
-   4           * @FilePath: \mabiao\driver\key.c
+   3           * @LastEditTime: 2022-05-26 11:46:29
+   4           * @FilePath: \51-car-mabiao\driver\key.c
    5           * @Description:
    6           *
    7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
    8           */
    9          #include "key.h"
-  10          uint8 key_scan() {
-  11   1        if (KEY_DOWN == 0) {
-  12   2          while (!KEY_DOWN);
-  13   2          return flag_down;
-  14   2        }
-  15   1        if (KEY_UP == 0) {
-  16   2          while (!KEY_UP);
-  17   2          return flag_up;
-  18   2        }
-  19   1        if (KEY_LEFT == 0) { 
-  20   2          while (!KEY_LEFT);
-  21   2          return flag_left;
-  22   2        }
-  23   1        if (KEY_RIGHT == 0) {
-  24   2          while (!KEY_RIGHT);
-  25   2          return flag_right;
-  26   2        }
-  27   1      }
-*** WARNING C291 IN LINE 27 OF driver\key.c: not every exit path returns a value
+  10          
+  11          uint8 key_scan() {
+  12   1        if (KEY_DOWN == 0) {
+  13   2          while (!KEY_DOWN);
+  14   2          return flag_down;
+  15   2        }
+  16   1        if (KEY_UP == 0) {
+  17   2          while (!KEY_UP);
+  18   2          return flag_up;
+  19   2        }
+  20   1        if (KEY_LEFT == 0) { 
+  21   2          while (!KEY_LEFT);
+  22   2          return flag_left;
+  23   2        }
+  24   1        if (KEY_RIGHT == 0) {
+  25   2          while (!KEY_RIGHT);
+  26   2          return flag_right;
+  27   2        }
+  28   1        return 0;
+  29   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     36    ----
+   CODE SIZE        =     39    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -49,4 +50,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

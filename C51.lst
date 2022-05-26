@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 23:41:03 PAGE 1   
+C51 COMPILER V9.57.0.0   C51                                                               05/26/2022 12:01:40 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE C51
@@ -10,8 +10,8 @@ line level    source
 
    1          /*
    2           * @LastEditors: Dark white
-   3           * @LastEditTime: 2022-05-25 22:37:31
-   4           * @FilePath: \51\51-car-mabiao\src\C51.c
+   3           * @LastEditTime: 2022-05-26 00:18:09
+   4           * @FilePath: \51-car-mabiao\src\C51.c
    5           * @Description:
    6           *
    7           * Copyright (c) 2022 by Dark white, All Rights Reserved.
@@ -62,7 +62,7 @@ line level    source
   52   1      }
   53          
   54          void time0() interrupt 1 //timer 0
-C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 23:41:03 PAGE 2   
+C51 COMPILER V9.57.0.0   C51                                                               05/26/2022 12:01:40 PAGE 2   
 
   55          {
   56   1        TH0 = 0x3C;
@@ -88,34 +88,33 @@ line level    source
   76   2          EX1 = 1;   //打开外部中断
   77   2          speed_m = n * diameter * 2.54 * 3.14 / 100 / 60; //轮径单位英寸 1英寸=2.54cm m/min
   78   2          speed_km = speed_m * 3.6;
-  79   2      
-  80   2          mileage_temp += speed_m;
-  81   2          if (mileage_temp >= 1000) {
-  82   3            mileage_temp = 0;
-  83   3            mileage++;
-  84   3          }
-  85   2          if (mileage >= 99) {
-  86   3            mileage = 0;
-  87   3          }
-  88   2        }
-  89   1        /* ----------page6 successful page for 1.5s --------*/
-  90   1        if (s % 30 == 0 && page == 6) { // 1.5s
-  91   2          s = 0;
-  92   2          page = 0;
-  93   2        }
-  94   1      }
-  95          
-  96          void int1() interrupt 2 { //External interrupt 1
-  97   1        count++;                //用于计算圈数
-  98   1      }
-  99          
- 100          static void alarm() {
- 101   1        if ((speed_km > speed_h)) {
- 102   2          beep1 = 1;
- 103   2        } else {
- 104   2          beep1 = 0;
- 105   2        }
- 106   1      }
+  79   2          mileage_temp += speed_m;
+  80   2          if (mileage_temp >= 1000) {
+  81   3            mileage_temp = 0;
+  82   3            mileage++;
+  83   3          }
+  84   2          if (mileage >= 99) {
+  85   3            mileage = 0;
+  86   3          }
+  87   2        }
+  88   1        /* ----------page6 successful page for 1.5s --------*/
+  89   1        if (s % 30 == 0 && page == 6) { // 1.5s
+  90   2          s = 0;
+  91   2          page = 0;
+  92   2        }
+  93   1      }
+  94          
+  95          void int1() interrupt 2 { //External interrupt 1
+  96   1        count++;                //用于计算圈数
+  97   1      }
+  98          
+  99          static void alarm() {
+ 100   1        if ((speed_km > speed_h)) {
+ 101   2          beep1 = 1;
+ 102   2        } else {
+ 103   2          beep1 = 0;
+ 104   2        }
+ 105   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -126,9 +125,9 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    DATA SIZE        =     16    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
-C51 COMPILER V9.57.0.0   C51                                                               05/25/2022 23:41:03 PAGE 3   
-
 END OF MODULE INFORMATION.
+
+C51 COMPILER V9.57.0.0   C51                                                               05/26/2022 12:01:40 PAGE 3   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

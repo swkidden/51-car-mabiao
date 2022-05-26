@@ -1,4 +1,4 @@
-C51 COMPILER V9.57.0.0   HAL_INIT                                                          05/25/2022 23:34:27 PAGE 1   
+C51 COMPILER V9.57.0.0   HAL_INIT                                                          05/26/2022 11:54:28 PAGE 1   
 
 
 C51 COMPILER V9.57.0.0, COMPILATION OF MODULE HAL_INIT
@@ -10,8 +10,8 @@ line level    source
 
    1          /*
    2           * @LastEditors: Dark white
-   3           * @LastEditTime: 2022-05-25 17:21:10
-   4           * @FilePath: \mabiao\driver\HAL_INIT.c
+   3           * @LastEditTime: 2022-05-26 00:19:58
+   4           * @FilePath: \51-car-mabiao\driver\HAL_INIT.c
    5           * @Description: 
    6           * 
    7           * Copyright (c) 2022 by Dark white, All Rights Reserved. 
@@ -19,21 +19,22 @@ line level    source
    9          #include "HAL_INIT.h"
   10          void hal_init(){
   11   1      /*---Timer 0------*/
-  12   1        TMOD &= 0xF0;   //清除定时器0模式位
-  13   1        TMOD |= 0x01;
-  14   1         TH0 = 0x3C;
-  15   1         TL0 = 0xb0; 
-  16   1         ET0=1;
-  17   1         TR0=1;
-  18   1      /*---External interrupt 1------*/ 
-  19   1         EX1=1;
-  20   1         IT1=1;
-  21   1         EA=1;
-  22   1      }
+  12   1         EXEN2=0;
+  13   1        TMOD &= 0xF0;   //清除定时器0模式位
+  14   1        TMOD |= 0x01;
+  15   1         TH0 = 0x3C;
+  16   1        TL0 = 0xb0; 
+  17   1         ET0=1;
+  18   1         TR0=1;
+  19   1      /*---External interrupt 1------*/ 
+  20   1         EX1=1;
+  21   1         IT1=1;
+  22   1         EA=1;
+  23   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     23    ----
+   CODE SIZE        =     25    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

@@ -1,14 +1,14 @@
 /*
  * @LastEditors: Dark white
- * @LastEditTime: 2022-05-25 12:21:45
- * @FilePath: \mabiao\driver\queue.c
+ * @LastEditTime: 2022-05-25 23:49:05
+ * @FilePath: \51-car-mabiao\driver\queue.c
  * @Description: 先入先出队列用于串口
  *
  * Copyright (c) 2022 by Dark white, All Rights Reserved.
  */
 #include"queue.h"
 #include "HAL_INIT.h"
-unsigned char receive_buff[QUEUE_SIZE] = {0};
+static unsigned char receive_buff[QUEUE_SIZE] = {0};
 unsigned char front = 0;
 unsigned char rear = 0;
 

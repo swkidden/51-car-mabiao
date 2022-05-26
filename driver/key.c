@@ -1,12 +1,13 @@
 /*
  * @LastEditors: Dark white
- * @LastEditTime: 2022-05-24 00:07:32
- * @FilePath: \mabiao\driver\key.c
+ * @LastEditTime: 2022-05-26 11:46:29
+ * @FilePath: \51-car-mabiao\driver\key.c
  * @Description:
  *
  * Copyright (c) 2022 by Dark white, All Rights Reserved.
  */
 #include "key.h"
+
 uint8 key_scan() {
   if (KEY_DOWN == 0) {
     while (!KEY_DOWN);
@@ -24,4 +25,5 @@ uint8 key_scan() {
     while (!KEY_RIGHT);
     return flag_right;
   }
+  return 0;
 }
